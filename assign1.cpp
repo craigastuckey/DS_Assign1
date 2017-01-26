@@ -8,6 +8,8 @@
 // This program accepts an integer between 0 and 200 from the user and performs
 // multiple operations on that integer
 
+#include <string.h>
+#include <sstream>
 #include <iostream>
 #include <iomanip>
 #include <cmath>
@@ -17,11 +19,18 @@ using namespace std;
 
 void CoinCalculation(int);
 void AgeCalculation(int);
-//void DigitSeperation(int);
+void DigitSeperation(int);
 //void ArmstrongNumber(int);
 //void FactorialCalculation(int);
 //void PrimeCalculation(int);
 //void HailstoneSequence(int);
+
+long int const SEC_IN_YEAR = 31536000;
+int const MIN_IN_YEAR = 525600;
+int const HOURS_IN_YEAR = 8760;
+int const DAYS_IN_YEAR = 365;
+int const WEEKS_IN_YEAR = 52;
+int const MONTHS_IN_YEAR = 12;
 
 int main() {
   int value;      // value entered by user
@@ -87,20 +96,21 @@ void CoinCalculation(int value) {
 
   AgeCalculation(value);
 
-  return 0;
+  return;
 }
 
 void AgeCalculation(int value) {
-  int months = value * 12;
-  int weeks = value * 52;
-  int days = value * 365;
-  int hours = value * 8760;
-  long int minutes = value * 525600;
-  long int seconds = value * (525600 * 60);
+  int months = value * MONTHS_IN_YEAR;
+  int weeks = value * WEEKS_IN_YEAR;
+  int days = value * DAYS_IN_YEAR;
+  int hours = value * HOURS_IN_YEAR;
+  long int minutes = value * MIN_IN_YEAR;
+  long long int seconds = value * SEC_IN_YEAR;
 
   cout << "********Age Calculation********" << endl << endl;
 
-  cout << "You have lived: " << endl << endl;
+  cout << "Assuming you're " << value << " years old," << endl;
+  cout << "You have lived at least:" << endl << endl;
 
   cout << months << " months" << endl;
   cout << weeks << " weeks" << endl;
@@ -109,8 +119,54 @@ void AgeCalculation(int value) {
   cout << minutes << " minutes" << endl;
   cout << seconds << " seconds" << endl << endl;
 
-//  DigitSeperation(value);
+  DigitSeperation(value);
 
   return;
 
+}
+
+void DigitSeperation(int value) {
+  int digits[] = {10, 10, 10};
+  int tens;
+  int ones;
+
+  cout << "********Digit Seperation********" << endl << endl;
+  cout << "Seperating digits for the integer " << value << endl;
+   
+  if(value >= 100) {
+    digits[0] = 1;
+    digits[1] = (value - 100) / 10;
+    digits[2] = (value - 100) - (10 * digits[1]);
+  }
+  
+  if(value >= 10 && value < 100) {
+    digits[1] = value / 10;
+    digits[2] = value - (digits[1] * 10);
+  }  
+
+  if(value < 10) 
+    digits[2] = value;
+  
+  for(int i=0; i<3; i++) {
+    if(digits[i] < 10)
+      cout << setw(6) << left << digits[i];
+  }
+
+  cout << endl;
+
+  for(int i=0; i<3; i++) {
+    switch(digits[i]) {
+      case 1 : cout << setw(6) << left << "one";break;
+      case 2 : cout << setw(6) << left << "two";break;
+      case 3 : cout << setw(6) << left << "three";break;
+      case 4 : cout << setw(6) << left << "four";break;
+      case 5 : cout << setw(6) << left << "five";break;
+      case 6 : cout << setw(6) << left << "six";break;
+      case 7 : cout << setw(6) << left << "seven";break;
+      case 8 : cout << setw(6) << left << "eight";break;
+      case 9 : cout << setw(6) << left << "nine";break;
+      case 0 : cout << setw(6) << left << "zero";break;
+    }
+  }
+  return;
 }
