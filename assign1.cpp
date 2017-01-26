@@ -22,7 +22,8 @@ void AgeCalculation(int);
 void DigitSeperation(int);
 //void ArmstrongNumber(int);
 //void FactorialCalculation(int);
-//void PrimeCalculation(int);
+void PrimeCalculation(int);
+void AddToPrimes(int, int*, int&);
 //void HailstoneSequence(int);
 
 long int const SEC_IN_YEAR = 31536000;
@@ -168,5 +169,34 @@ void DigitSeperation(int value) {
       case 0 : cout << setw(6) << left << "zero";break;
     }
   }
+
+  //ArmstrongNumber(value);
   return;
+}
+
+void PrimeCalculation(value) {
+  int *primes = new int [1];
+  primes[0] = 1;
+  int count = 0;
+  
+  for(int i=1; i<=value; i++) {
+    for(int j=2; j<=i; j++) {
+      if(j % i && j != i)
+        break;
+      if(j == i)
+        AddToPrimes(i, primes, count);  
+    }
+  }
+}
+
+void AddToPrimes(int i, int* primes, int &count) {
+  count++;
+  int *temp = new int[count]; 
+
+  for(int i=0; i<(count - 1); i++) 
+    temp[i] = primes[i];
+
+  delete [] primes;
+  primes = temp;
+  
 }
