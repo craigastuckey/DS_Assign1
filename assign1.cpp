@@ -178,40 +178,31 @@ void DigitSeperation(int value) {
 }
 
 void PrimeCalculation(int value) {
-  int *primes = new int [1];
-  primes[0] = 1;
+  int size = 46;
+  int primes[size];
   int count = 0;
 
   cout << "********Prime Calculation********" << endl << endl;
 
-  for(int i=1; i<=value; i++) {
+  for(int i=2; i<=value; i++) {
     for(int j=2; j<=i; j++) {
-      if(j % i && j != i)
-        break;
-      if(j % i && j == i)
-        AddToPrimes(i, primes, count);  
+      if(i % j == 0 && j != i)break;
+      if(j == i){
+        primes[count++] = i;
+      }
     }
   }
 
-  if(primes[count] == value)
+  if(primes[count-1] == value)
     cout << value << " is a prime" << endl << endl;
   else
     cout << value << " is not a prime" << endl << endl;
 
   cout << "Primes between 0 and " << value << " are:" << endl;
 
-  for(int i=0; i<=count; i++)
-    cout << primes[i] << ", ";
+  for(int i=0; i<count; i++)
+    cout << primes[i] << " ";
+
+  cout << endl;
 }
 
-void AddToPrimes(int i, int* primes, int &count) {
-  count++;
-  int *temp = new int[count+1]; 
-
-  for(int i=0; i<(count); i++) 
-    temp[i] = primes[i];
-
-  delete [] primes;
-  primes = temp;
-  
-}
