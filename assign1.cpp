@@ -71,8 +71,13 @@ int main()
 
         valid = false;
 
-        cout << endl << "Would you like to run the program again? (y/n): ";
-        cin >> repeat;
+        do {
+          cout << endl << "Would you like to run the program again? (y/n): ";
+          cin >> repeat;
+          if(repeat != 'y' && repeat != 'Y' && repeat != 'n' && repeat != 'N')
+            cout << endl << "Please enter y/Y for Yes or n/N for no" << endl;
+        }
+        while(repeat != 'y' && repeat != 'Y' && repeat != 'n' && repeat != 'N');
     }
     while(repeat == 'y' || repeat == 'Y');
 
@@ -278,7 +283,7 @@ void PrimeCalculation(int value)
 void FactorialCalculation(int value)
 {
 
-    int factorial = 1;
+    long long int factorial = 1;
 
     cout << "********Factorial Calculation********" << endl << endl;
 
@@ -304,7 +309,7 @@ void HailstoneSequence(int value)
 
     while(mutatedValue != 1)
     {
-        cout << mutatedValue << endl;
+        cout << mutatedValue << " ";
 
         if(mutatedValue % 2 != 0)
             mutatedValue = (mutatedValue * 3) + 1;
